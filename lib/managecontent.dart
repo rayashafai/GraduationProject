@@ -8,7 +8,7 @@ class ManageContentPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Manage Content'),
-        backgroundColor: Colors.green[700],
+        backgroundColor: const Color.fromARGB(255, 15, 103, 94),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -20,7 +20,7 @@ class ManageContentPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87,
+                color: Color.fromARGB(255, 15, 103, 94),
               ),
             ),
             const SizedBox(height: 16),
@@ -64,10 +64,16 @@ class ManageContentPage extends StatelessWidget {
               onPressed: () {
                 // Navigate to Add New Content Page
               },
-              icon: const Icon(Icons.add),
-              label: const Text('Add New Content'),
+              icon: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+              label: const Text(
+                'Add New Content',
+                style: TextStyle(color: Colors.white),
+              ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green[600],
+                backgroundColor: const Color.fromARGB(255, 13, 103, 94),
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 textStyle: const TextStyle(fontSize: 16),
               ),
@@ -94,14 +100,19 @@ class ManageContentPage extends StatelessWidget {
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
+            color: Colors.teal,
           ),
         ),
-        subtitle: Text(description),
+        subtitle: Text(
+          description,
+          style: const TextStyle(color: Color.fromARGB(255, 15, 103, 94)),
+        ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(
-              icon: const Icon(Icons.edit, color: Colors.blue),
+              icon: const Icon(Icons.edit,
+                  color: Color.fromARGB(255, 3, 196, 249)),
               onPressed: onEdit,
             ),
             IconButton(

@@ -8,7 +8,7 @@ class NotificationsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Manage Notifications'),
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.purple,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -19,7 +19,7 @@ class NotificationsPage extends StatelessWidget {
             TextField(
               decoration: InputDecoration(
                 hintText: 'Search Notifications...',
-                prefixIcon: Icon(Icons.search, color: Colors.teal),
+                prefixIcon: Icon(Icons.search, color: Colors.purple),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
@@ -43,7 +43,7 @@ class NotificationsPage extends StatelessWidget {
                     child: ListTile(
                       leading: Icon(
                         Icons.notifications,
-                        color: Colors.teal,
+                        color: Colors.purple,
                         size: 30,
                       ),
                       title: Text(
@@ -84,7 +84,7 @@ class NotificationsPage extends StatelessWidget {
             builder: (context) => _buildNewNotificationDialog(context),
           );
         },
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.purple,
         icon: const Icon(Icons.add),
         label: const Text('Send Notification'),
       ),

@@ -1,3 +1,4 @@
+import 'package:firstt/setting.dart';
 import 'package:flutter/material.dart';
 
 // Import the Manage Users Page
@@ -47,7 +48,7 @@ class AdminPage extends StatelessWidget {
                     // Manage Users Card
                     _buildAdminCard(
                       icon: Icons.people,
-                      color: Colors.orange,
+                      color: const Color.fromARGB(255, 195, 118, 2),
                       title: 'Manage Users',
                       description: 'View and manage user accounts.',
                       onTap: () {
@@ -62,7 +63,7 @@ class AdminPage extends StatelessWidget {
                     // Manage Content Card
                     _buildAdminCard(
                       icon: Icons.content_copy,
-                      color: Colors.green,
+                      color: const Color.fromARGB(255, 13, 103, 94),
                       title: 'Manage Content',
                       description: 'Review and update app content.',
                       onTap: () {
@@ -81,7 +82,12 @@ class AdminPage extends StatelessWidget {
                       title: 'Settings',
                       description: 'Change app settings and configurations.',
                       onTap: () {
-                        // Navigate to Settings Page
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SettingsPage(),
+                          ),
+                        ); // Navigate to Settings Page
                       },
                     ),
                     // Notifications Card
@@ -102,7 +108,7 @@ class AdminPage extends StatelessWidget {
                     // Reports Card
                     _buildAdminCard(
                       icon: Icons.bar_chart,
-                      color: Colors.teal,
+                      color: const Color.fromARGB(255, 254, 31, 150),
                       title: 'View Reports',
                       description: 'Analyze app reports and statistics.',
                       onTap: () {
