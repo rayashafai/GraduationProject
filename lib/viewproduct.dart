@@ -12,7 +12,7 @@ class ViewProductsPage extends StatelessWidget {
         'name': 'Ariana Mirrors',
         'price': '\$10.99',
         'image':
-            'https://via.placeholder.com/150', // Replace with actual image URL
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaY3K6djcWZAtgxKUlwmUKTPpLCU83jPgb1w&s', // Replace with actual image URL
       },
       {
         'name': 'Arched Natural Wood',

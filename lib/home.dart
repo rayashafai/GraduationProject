@@ -1,21 +1,8 @@
 import 'package:flutter/material.dart';
+import 'viewproduct.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
-
-  Widget buildPageWithBackground({required Widget child}) {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgpG5mthX6nD0IedvjM69paFE3UtnGK9E74Q&s',
-          ),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: child,
-    );
-  }
 
   void _onNavBarTap(BuildContext context, int index) {
     switch (index) {
@@ -36,9 +23,68 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Full categories list
+    final categories = [
+      {
+        'name': 'White Mirrors',
+        'image':
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaY3K6djcWZAtgxKUlwmUKTPpLCU83jPgb1w&s'
+      },
+      {
+        'name': 'Windows Mirrors',
+        'image':
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN4_KkqhJ9_vBwlmrjgX7OTXun713--lBEng&s'
+      },
+      {
+        'name': 'Illuminated Mirrors',
+        'image':
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTULpZOkQUEdb8AafAUfp5OtALfwV7PshgVJg&s'
+      },
+      {
+        'name': 'Handmade',
+        'image':
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjq5dY4dhxB7NL0pE74OIjVmU9qpyQY-9qdg&s'
+      },
+      {
+        'name': 'Vibrant Designs',
+        'image':
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStt2OxQGPRMjvWlmfvFUfLaWdhFVK0J-ahBw&s'
+      },
+      {
+        'name': 'Best Seller',
+        'image':
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTokHuuv9z1--2oN4L8_3RtPuG3Xe6bznzXjw&s'
+      },
+      {
+        'name': 'Table Lamp',
+        'image':
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3gH08DjcJ5fVDh9y6z_8vV2nSEy0G9Rld0w&s'
+      },
+      {
+        'name': 'Decor',
+        'image':
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwpHthu_S4zlfG5a49oglfC_-6ryLiSghZiA&s'
+      },
+      {
+        'name': 'Skmlat',
+        'image':
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDvjFYr-T7Ec1PqTAuGWMSx5CEgBfkOninJQ&s'
+      },
+      {
+        'name': 'Modern Mirrors',
+        'image':
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY1S6C-2jj-qZU0a2_ARxqHewwfc5623k3zQ&s'
+      },
+      {
+        'name': 'Natural Wood',
+        'image':
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXWsD9UYCh04MN1lGhiwsCiJjavrUSF8VzYw&s'
+      },
+    ];
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Categories'),
         backgroundColor: Colors.brown[400],
       ),
       drawer: Drawer(
@@ -88,89 +134,91 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      body: buildPageWithBackground(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text(
-                  'Welcome to the Home Page!',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  'This is where your content will appear.',
-                  style: TextStyle(fontSize: 18),
-                ),
-                const SizedBox(height: 120),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/viewproduct');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.brown[400],
-                        minimumSize: const Size(100, 10),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 20, horizontal: 30),
-                      ),
-                      child: const Text(
-                        'View Products',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/orders');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.brown[400],
-                        minimumSize: const Size(100, 10),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 20, horizontal: 30),
-                      ),
-                      child: const Text(
-                        'My Orders',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/help');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.brown[400],
-                    minimumSize: const Size(100, 10),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 30),
-                  ),
-                  child: const Text(
-                    'Help & Support',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ],
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgpG5mthX6nD0IedvjM69paFE3UtnGK9E74Q&s',
             ),
+            fit: BoxFit.cover,
           ),
+        ),
+        child: Column(
+          children: [
+            // Search Bar
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  hintText: 'Search...',
+                  prefixIcon: const Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+                onChanged: (value) {
+                  // Add search functionality here if needed
+                },
+              ),
+            ),
+            // Category List
+            Expanded(
+              child: ListView.builder(
+                itemCount: categories.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.all(16.0),
+                      leading: Image.network(
+                        categories[index]['image']!,
+                        width: 100, // Width for the image
+                        height: 100, // Height for the image
+                        fit: BoxFit.cover,
+                      ),
+                      title: Text(
+                        categories[index]['name']!,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      trailing: ElevatedButton(
+                        onPressed: () {
+                          if (categories[index]['name'] == 'White Mirrors') {
+                            // Navigate to ViewProductsPage
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ViewProductsPage(),
+                              ),
+                            );
+                          } // Add action for "View" button
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.brown[400],
+                        ),
+                        child: const Text(
+                          'View',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
+        currentIndex: 1, // Set active index to 1 for "Categories"
         onTap: (index) => _onNavBarTap(context, index),
-        backgroundColor: Colors.brown[400], // Updated background color
-        selectedItemColor: Colors.white, // Updated selected item color
-        unselectedItemColor: const Color.fromARGB(
-            255, 238, 205, 205), // Unselected items remain grey
-        type: BottomNavigationBarType.fixed, // Enable backgroundColor property
+        backgroundColor: Colors.brown[400],
+        selectedItemColor: Colors.white,
+        unselectedItemColor: const Color.fromARGB(255, 238, 205, 205),
+        type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
