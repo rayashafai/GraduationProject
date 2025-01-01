@@ -97,7 +97,7 @@ class HomePage extends StatelessWidget {
                 color: Colors.brown[400],
               ),
               accountName: const Text(
-                'Customer Name',
+                'Customer Naame',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               accountEmail: const Text('customer@example.com'),
