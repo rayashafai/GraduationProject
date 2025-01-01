@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'viewproduct.dart';
+import 'whitemirror.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -191,7 +191,7 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const ViewProductsPage(),
+                                builder: (context) => const WhiteMirrorPage(),
                               ),
                             );
                           } // Add action for "View" button

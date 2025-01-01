@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'detailspage.dart'; // Import the ProductDetailPage
+import 'detailspage.dart'; // Import the whitemirrorPage
 
-class ViewProductsPage extends StatelessWidget {
-  const ViewProductsPage({Key? key}) : super(key: key);
+class WhiteMirrorPage extends StatelessWidget {
+  const WhiteMirrorPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +18,31 @@ class ViewProductsPage extends StatelessWidget {
         'name': 'Arched Natural Wood',
         'price': '\$19.99',
         'image':
-            'https://via.placeholder.com/150', // Replace with actual image URL
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr-8mqWjGtCKn_ZEfBSOjxetJUpVsH5Oz9cg&s', // Replace with actual image URL
       },
       {
         'name': 'Capsule Standing',
         'price': '\$5.49',
         'image':
-            'https://via.placeholder.com/150', // Replace with actual image URL
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUMh5wJM2DnEsXWEHFr_yVcGNDn4ceRrbqAw&s', // Replace with actual image URL
+      },
+      {
+        'name': 'Capsule Standing',
+        'price': '\$5.49',
+        'image':
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXjtl5UBCR8rOGjNTDmeNf2CJtx8If0Ahw7A&s', // Replace with actual image URL
+      },
+      {
+        'name': 'Capsule Standing',
+        'price': '\$5.49',
+        'image':
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO0vFKX7bjE_PwJPXzKOmyZ7OfgJ3h_9RlxQ&s', // Replace with actual image URL
+      },
+      {
+        'name': 'Capsule Standing',
+        'price': '\$5.49',
+        'image':
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ17A3Q7LE90umaUxrtJZEWnh8GT7kdj1hBXQ&s', // Replace with actual image URL
       },
       // Add more products as needed
     ];

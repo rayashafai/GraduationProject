@@ -1,9 +1,10 @@
+//import 'package:firstt/whitemirror.dart';
 import 'package:flutter/material.dart';
 import 'welcome.dart'; // Import WelcomePage
 import 'signin.dart'; // Import SignInPage
 import 'signup.dart'; // Import SignUpPage
 import 'home.dart'; // Import HomePage
-import 'viewproduct.dart'; // Import ViewProductsPage
+import 'whitemirror.dart'; // Import WhiteMirrorPage
 import 'detailspage.dart'; // Import ProductDetailPage
 import 'profile.dart'; // Import ProfilePage
 import 'editprofile.dart'; // Import EditProfilePage
@@ -38,9 +39,9 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => const SignUpPage());
           case '/home':
             return MaterialPageRoute(builder: (context) => const HomePage());
-          case '/viewproduct':
+          case '/whitemirror':
             return MaterialPageRoute(
-                builder: (context) => const ViewProductsPage());
+                builder: (context) => const WhiteMirrorPage());
           case '/detailspage':
             // Extract arguments passed to the route
             final args = settings.arguments as Map<String, String>;
