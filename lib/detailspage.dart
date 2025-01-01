@@ -33,7 +33,7 @@ class ProductDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product Details'),
+        title: const Text('Product Deetails'),
         backgroundColor: Colors.brown[400],
       ),
       body: Container(

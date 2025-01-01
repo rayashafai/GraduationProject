@@ -10,7 +10,7 @@ class ViewProductsPage extends StatelessWidget {
     final List<Map<String, String>> products = [
       {
         'name': 'Ariana Mirrors',
-        'price': '\$10.99',
+        'price': '\$10.9',
         'image':
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaY3K6djcWZAtgxKUlwmUKTPpLCU83jPgb1w&s', // Replace with actual image URL
       },
