@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'whitemirror.dart';
+import 'wINDOWSmirror.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -192,6 +193,15 @@ class HomePage extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const WhiteMirrorPage(),
+                              ),
+                            );
+                          } else if (categories[index]['name'] ==
+                              'Windows Mirrors') {
+                            // Navigate to ViewProductsPage
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const WindowsMirrorPage(),
                               ),
                             );
                           } // Add action for "View" button

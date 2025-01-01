@@ -5,6 +5,7 @@ import 'signin.dart'; // Import SignInPage
 import 'signup.dart'; // Import SignUpPage
 import 'home.dart'; // Import HomePage
 import 'whitemirror.dart'; // Import WhiteMirrorPage
+import 'windowsmirror.dart'; // Import WhiteMirrorPage
 import 'detailspage.dart'; // Import ProductDetailPage
 import 'profile.dart'; // Import ProfilePage
 import 'editprofile.dart'; // Import EditProfilePage
@@ -42,6 +43,9 @@ class MyApp extends StatelessWidget {
           case '/whitemirror':
             return MaterialPageRoute(
                 builder: (context) => const WhiteMirrorPage());
+          case '/windowsmirror':
+            return MaterialPageRoute(
+                builder: (context) => const WindowsMirrorPage());
           case '/detailspage':
             // Extract arguments passed to the route
             final args = settings.arguments as Map<String, String>;

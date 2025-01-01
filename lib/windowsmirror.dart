@@ -1,55 +1,55 @@
 import 'package:flutter/material.dart';
-import 'detailspage.dart'; // Import the whitemirrorPage
+import 'windowsdetails.dart'; // Import the whitemirrorPage
 
-class WhiteMirrorPage extends StatelessWidget {
-  const WhiteMirrorPage({Key? key}) : super(key: key);
+class WindowsMirrorPage extends StatelessWidget {
+  const WindowsMirrorPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // List of sample products with names, prices, and images
     final List<Map<String, String>> products = [
       {
-        'name': 'Ariana Mirrors',
-        'price': '\$10.9',
+        'name': 'Black Window',
+        'price': '\$100',
         'image':
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaY3K6djcWZAtgxKUlwmUKTPpLCU83jPgb1w&s', // Replace with actual image URL
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjQBHfQc8Fp4q8TW9ahyedg0psHHO4QlbdnQ&s', // Replace with actual image URL
       },
       {
-        'name': 'Arched Natural Wood',
-        'price': '\$19.99',
+        'name': 'Gallery Curtis',
+        'price': '\$89.99',
         'image':
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr-8mqWjGtCKn_ZEfBSOjxetJUpVsH5Oz9cg&s', // Replace with actual image URL
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc2KEHstnc9vU1wV5zaWblRrVoMJoizWzsyQ&s', // Replace with actual image URL
       },
       {
-        'name': 'Capsule Standing',
-        'price': '\$5.49',
+        'name': 'Bridgit classic',
+        'price': '\$75.49',
         'image':
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUMh5wJM2DnEsXWEHFr_yVcGNDn4ceRrbqAw&s', // Replace with actual image URL
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSThnJhZJ_HFhDxuUX4UtN3_XzqinMCUsNIOg&s', // Replace with actual image URL
       },
       {
-        'name': 'Capsule Standing',
-        'price': '\$5.49',
+        'name': 'Fulbrook indoor',
+        'price': '\$25.50',
         'image':
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXjtl5UBCR8rOGjNTDmeNf2CJtx8If0Ahw7A&s', // Replace with actual image URL
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-zeLjCPltgak6g85xqTggk4F82ATy1wpEWw&s', // Replace with actual image URL
       },
       {
-        'name': 'Capsule Standing',
-        'price': '\$5.49',
+        'name': 'Wiskett Window',
+        'price': '\$30',
         'image':
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO0vFKX7bjE_PwJPXzKOmyZ7OfgJ3h_9RlxQ&s', // Replace with actual image URL
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtoaxdWjUGTClAc8ggpnZrGAS1aW8K1E52OA&s', // Replace with actual image URL
       },
       {
-        'name': 'Capsule Standing',
-        'price': '\$5.49',
+        'name': 'Reclaimed Wooden',
+        'price': '\$49.99',
         'image':
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ17A3Q7LE90umaUxrtJZEWnh8GT7kdj1hBXQ&s', // Replace with actual image URL
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIRMuNhUXTQzZw0u0eRmXFZRO15ZT-DNR_Vw&s', // Replace with actual image URL
       },
       // Add more products as needed
     ];
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('View Products'),
+        title: const Text('Windows Mirror'),
         backgroundColor: Colors.brown[400],
       ),
       body: Container(
@@ -90,7 +90,7 @@ class WhiteMirrorPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ProductDetailPage(
+                          builder: (context) => WindowsDetailPage(
                             name: products[index]['name']!,
                             price: products[index]['price']!,
                             image: products[index]['image']!,
