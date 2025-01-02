@@ -49,7 +49,7 @@ class WindowsMirrorPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Windows Mirror'),
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Colors.brown[600], // Dark brown for app bar
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -61,48 +61,90 @@ class WindowsMirrorPage extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: ListView.builder(
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, // Two products per row
+              crossAxisSpacing: 16, // Space between columns
+              mainAxisSpacing: 16, // Space between rows
+              childAspectRatio: 0.75, // Control height and width ratio
+            ),
             itemCount: products.length,
             itemBuilder: (context, index) {
               return Card(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.all(10),
-                  leading: Image.network(
-                    products[index]['image']!,
-                    width: 60,
-                    height: 60,
-                    fit: BoxFit.cover,
-                  ),
-                  title: Text(
-                    products[index]['name']!,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(
-                    products[index]['price']!,
-                    style: const TextStyle(fontSize: 16, color: Colors.green),
-                  ),
-                  trailing: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => WindowsDetailPage(
-                            name: products[index]['name']!,
-                            price: products[index]['price']!,
-                            image: products[index]['image']!,
-                          ),
+                margin: const EdgeInsets.all(0),
+                shape: RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.circular(12), // Rounded corners for card
+                ),
+                shadowColor: Colors.brown.withOpacity(0.3), // Dark brown shadow
+                elevation: 6,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.network(
+                        products[index]['image']!,
+                        width: double.infinity,
+                        height: 120,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        products[index]['name']!,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color:
+                              Colors.brown, // Dark brown color for product name
                         ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.brown[400],
+                      ),
                     ),
-                    child: const Text(
-                      'More',
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        products[index]['price']!,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.brown[400], // Lighter brown for price
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(
+                        height: 4), // Reduced space between price and button
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => WindowsDetailPage(
+                                name: products[index]['name']!,
+                                price: products[index]['price']!,
+                                image: products[index]['image']!,
+                              ),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              Colors.brown[500], // Medium brown for button
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                        ),
+                        child: const Text(
+                          'More',
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               );
             },
@@ -111,7 +153,7 @@ class WindowsMirrorPage extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Colors.brown[600], // Dark brown for bottom nav bar
         selectedItemColor: Colors.white,
         unselectedItemColor: const Color.fromARGB(255, 238, 205, 205),
         currentIndex: 1, // Set to 1 as this page focuses on Products
@@ -137,7 +179,7 @@ class WindowsMirrorPage extends StatelessWidget {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart), // Updated to shopping cart icon
+            icon: Icon(Icons.shopping_cart),
             label: 'Cart', // Updated label
           ),
           BottomNavigationBarItem(

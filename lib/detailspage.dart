@@ -164,7 +164,7 @@ class ProductDetailPage extends StatelessWidget {
                           // Add product to the cart using CartModel
                           final cartModel =
                               Provider.of<CartModel>(context, listen: false);
-                          cartModel.addToCart(product);
+                          cartModel.addItem(product);
 
                           // Navigate to CartPage
                           Navigator.pushNamed(context, '/cart');

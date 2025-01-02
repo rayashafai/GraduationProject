@@ -48,67 +48,107 @@ class WhiteMirrorPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('White Mirrors'),
-        backgroundColor: Colors.brown[400],
+        backgroundColor:
+            Colors.brown[600], // A darker brown shade for the app bar
       ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgpG5mthX6nD0IedvjM69paFE3UtnGK9E74Q&s',
             ),
             fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(Colors.brown.withOpacity(0.4),
+                BlendMode.darken), // Using brown tones
           ),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: ListView.builder(
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, // Two products per row
+              crossAxisSpacing: 16, // Space between columns
+              mainAxisSpacing: 16, // Space between rows
+              childAspectRatio: 0.75, // Control height and width ratio
+            ),
             itemCount: products.length,
             itemBuilder: (context, index) {
               return Card(
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.all(10),
-                  leading: Image.network(
-                    products[index]['image']!,
-                    width: 60,
-                    height: 60,
-                    fit: BoxFit.cover,
-                  ),
-                  title: Text(
-                    products[index]['name']!,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                margin: const EdgeInsets.all(0),
+                shape: RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.circular(12), // Rounded corners for card
+                ),
+                shadowColor: Colors.brown.withOpacity(0.2), // Soft brown shadow
+                elevation: 5,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.network(
+                        products[index]['image']!,
+                        width: double.infinity,
+                        height: 120,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                  subtitle: Text(
-                    products[index]['price']!,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.green,
-                    ),
-                  ),
-                  trailing: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ProductDetailPage(
-                            name: products[index]['name']!,
-                            price: products[index]['price']!,
-                            image: products[index]['image']!,
-                          ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        products[index]['name']!,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color:
+                              Colors.brown, // Brown color for the product name
                         ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.brown[400],
+                      ),
                     ),
-                    child: const Text(
-                      'More',
-                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        products[index]['price']!,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color:
+                              Colors.brown[400], // Lighter brown for the price
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(
+                        height: 4), // Reduced space between price and button
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProductDetailPage(
+                                name: products[index]['name']!,
+                                price: products[index]['price']!,
+                                image: products[index]['image']!,
+                              ),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              Colors.brown[500], // Medium brown for button
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                        ),
+                        child: const Text(
+                          'More',
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               );
             },
@@ -117,7 +157,7 @@ class WhiteMirrorPage extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Colors.brown[600], // Matching the app bar color
         selectedItemColor: Colors.white,
         unselectedItemColor: const Color.fromARGB(255, 238, 205, 205),
         currentIndex: 1, // Reflects the View Products page
@@ -144,8 +184,8 @@ class WhiteMirrorPage extends StatelessWidget {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart), // Changed to shopping cart
-            label: 'Cart', // Updated label
+            icon: Icon(Icons.shopping_cart),
+            label: 'Cart',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),

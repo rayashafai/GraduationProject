@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; // Add provider package
+import 'cartmodel.dart'; // Import CartModel (you should have a CartModel for managing the cart)
 
 class WindowsDetailPage extends StatelessWidget {
   final String name;
@@ -121,7 +123,7 @@ class WindowsDetailPage extends StatelessWidget {
                       IconButton(
                         icon: const Icon(Icons.remove),
                         onPressed: () {
-                          // Handle decrement logic
+                          // Handle decrement logic (if needed)
                         },
                       ),
                       const Text(
@@ -131,7 +133,7 @@ class WindowsDetailPage extends StatelessWidget {
                       IconButton(
                         icon: const Icon(Icons.add),
                         onPressed: () {
-                          // Handle increment logic
+                          // Handle increment logic (if needed)
                         },
                       ),
                     ],
@@ -147,11 +149,25 @@ class WindowsDetailPage extends StatelessWidget {
                       const SizedBox(width: 10),
                       ElevatedButton(
                         onPressed: () {
-                          // Implement Add to Cart functionality
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('Product added to cart')),
-                          );
+                          // Remove '$' and convert price to double
+                          final cleanPrice =
+                              double.parse(price.replaceAll('\$', ''));
+
+                          // Create product object
+                          final product = {
+                            'name': name,
+                            'price': cleanPrice,
+                            'quantity': 1,
+                            'image': image,
+                          };
+
+                          // Add product to the cart using CartModel
+                          final cartModel =
+                              Provider.of<CartModel>(context, listen: false);
+                          cartModel.addItem(product);
+
+                          // Navigate to CartPage
+                          Navigator.pushNamed(context, '/cart');
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.brown[400],

@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
 
 class CartModel extends ChangeNotifier {
-  List<Map<String, dynamic>> _cartItems = [];
+  List<Map<String, dynamic>> _items = [];
 
-  // Getter to access cart items
-  List<Map<String, dynamic>> get cartItems => _cartItems;
+  List<Map<String, dynamic>> get items => _items;
 
-  // Add item to cart
-  void addToCart(Map<String, dynamic> product) {
-    _cartItems.add(product);
-    notifyListeners(); // Notify listeners to update UI
-  }
-
-  // Optionally, you can add other methods like removeFromCart, updateQuantity, etc.
-  void removeFromCart(Map<String, dynamic> product) {
-    _cartItems.remove(product);
+  // Add a product to the cart
+  void addItem(Map<String, dynamic> product) {
+    _items.add(product);
     notifyListeners();
   }
 
-  void updateQuantity(Map<String, dynamic> product, int quantity) {
-    final index = _cartItems.indexOf(product);
+  // Update quantity of a product in the cart
+  void updateQuantity(Map<String, dynamic> item, int delta) {
+    final index = _items.indexOf(item);
     if (index != -1) {
-      _cartItems[index]['quantity'] = quantity;
+      _items[index]['quantity'] += delta;
+      if (_items[index]['quantity'] <= 0) {
+        _items.removeAt(index);
+      }
       notifyListeners();
     }
+  }
+
+  // Remove a product from the cart
+  void removeItem(Map<String, dynamic> item) {
+    _items.remove(item);
+    notifyListeners();
   }
 }

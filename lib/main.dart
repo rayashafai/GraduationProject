@@ -13,6 +13,7 @@ import 'adminlogin.dart'; // Import AdminLoginPage
 import 'admin.dart'; // Import AdminPage
 import 'cart.dart'; // Import CartPage
 import 'cartmodel.dart'; // Import CartModel
+import 'pay.dart';
 
 void main() {
   runApp(
@@ -52,6 +53,8 @@ class MyApp extends StatelessWidget {
           case '/windowsmirror':
             return MaterialPageRoute(
                 builder: (context) => const WindowsMirrorPage());
+          case '/pay':
+            return MaterialPageRoute(builder: (context) => PaymentPage());
           case '/cart':
             return MaterialPageRoute(builder: (context) => CartPage());
           case '/detailspage':

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; // Import provider
+import 'cartmodel.dart'; // Import CartModel
 
 class CartPage extends StatefulWidget {
   @override
@@ -6,41 +8,12 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  List<Map<String, dynamic>> cartItems = [];
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Get the arguments passed from ProductDetailPage and cast it to Map<String, dynamic>
-    final newProduct =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-
-    if (newProduct != null) {
-      setState(() {
-        cartItems.add(newProduct);
-      });
-    }
-  }
-
-  // Method to handle item quantity update
-  void _updateQuantity(int index, int delta) {
-    setState(() {
-      cartItems[index]['quantity'] += delta;
-      if (cartItems[index]['quantity'] <= 0) {
-        cartItems.removeAt(index);
-      }
-    });
-  }
-
-  // Method to handle item removal
-  void _removeItem(int index) {
-    setState(() {
-      cartItems.removeAt(index);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    // Access cart items from the CartModel provider
+    final cartItems = Provider.of<CartModel>(context).items;
+
+    // Calculate total price
     double totalPrice = cartItems.fold(
       0.0,
       (sum, item) => sum + (item['price'] * item['quantity']),
@@ -113,8 +86,12 @@ class _CartPageState extends State<CartPage> {
                                   IconButton(
                                     icon: const Icon(Icons.remove),
                                     onPressed: () {
+                                      // Decrease quantity
                                       if (item['quantity'] > 1) {
-                                        _updateQuantity(index, -1);
+                                        Provider.of<CartModel>(context,
+                                                listen: false)
+                                            .updateQuantity(
+                                                item, -1); // Pass the item
                                       }
                                     },
                                   ),
@@ -125,7 +102,11 @@ class _CartPageState extends State<CartPage> {
                                   IconButton(
                                     icon: const Icon(Icons.add),
                                     onPressed: () {
-                                      _updateQuantity(index, 1);
+                                      // Increase quantity
+                                      Provider.of<CartModel>(context,
+                                              listen: false)
+                                          .updateQuantity(
+                                              item, 1); // Pass the item
                                     },
                                   ),
                                 ],
@@ -137,7 +118,9 @@ class _CartPageState extends State<CartPage> {
                         IconButton(
                           icon: const Icon(Icons.delete, color: Colors.red),
                           onPressed: () {
-                            _removeItem(index);
+                            // Remove item from cart
+                            Provider.of<CartModel>(context, listen: false)
+                                .removeItem(item); // Pass the item to remove
                           },
                         ),
                       ],
@@ -189,11 +172,9 @@ class _CartPageState extends State<CartPage> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Implement checkout logic
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text('Proceeding to Checkout')),
-                        );
+                        // Navigate to the Pay page (checkout page)
+                        Navigator.pushNamed(
+                            context, '/pay'); // Ensure the route exists
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.brown[400],
@@ -203,7 +184,7 @@ class _CartPageState extends State<CartPage> {
                         ),
                       ),
                       child: const Text(
-                        'Checkout',
+                        'Proceeding to Checkout',
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.white,
@@ -216,6 +197,48 @@ class _CartPageState extends State<CartPage> {
             ),
           ],
         ),
+      ),
+      // Bottom Navigation Bar
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.brown[400],
+        selectedItemColor: Colors.white,
+        unselectedItemColor: const Color.fromARGB(255, 238, 205, 205),
+        currentIndex: 1, // Set to 1 as this page is focused on Cart
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Navigator.pushNamed(context, '/home'); // Navigate to Home
+              break;
+            case 1:
+              // Stay on CartPage
+              break;
+            case 2:
+              Navigator.pushNamed(context, '/search'); // Navigate to Search
+              break;
+            case 3:
+              Navigator.pushNamed(context, '/profile'); // Navigate to Profile
+              break;
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'Cart',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
       ),
     );
   }
