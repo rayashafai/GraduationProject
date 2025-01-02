@@ -18,7 +18,7 @@ class ProductDetailPage extends StatelessWidget {
         Navigator.pushNamed(context, '/home'); // Navigate to Home
         break;
       case 1:
-        Navigator.pushNamed(context, '/viewproduct'); // Navigate to Products
+        Navigator.pushNamed(context, '/cart'); // Navigate to Cart
         break;
       case 2:
         Navigator.pushNamed(context, '/search'); // Navigate to Search
@@ -174,7 +174,7 @@ class ProductDetailPage extends StatelessWidget {
         backgroundColor: Colors.brown[400],
         selectedItemColor: Colors.white,
         unselectedItemColor: const Color.fromARGB(255, 238, 205, 205),
-        currentIndex: 1, // Set to 1 as this corresponds to View Products
+        currentIndex: 1, // Set to 1 as this corresponds to Cart
         onTap: (index) => _onNavBarTap(context, index),
         items: const [
           BottomNavigationBarItem(
@@ -182,8 +182,8 @@ class ProductDetailPage extends StatelessWidget {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            label: 'Categories',
+            icon: Icon(Icons.shopping_cart),
+            label: 'Cart', // Changed to Cart
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),

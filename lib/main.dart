@@ -11,6 +11,7 @@ import 'profile.dart'; // Import ProfilePage
 import 'editprofile.dart'; // Import EditProfilePage
 import 'adminlogin.dart'; // Import AdminLoginPage
 import 'admin.dart'; // Import AdminPage
+import 'cart.dart';
 //import 'managecontent.dart'; //Import ManageContentPage
 
 void main() {
@@ -46,6 +47,8 @@ class MyApp extends StatelessWidget {
           case '/windowsmirror':
             return MaterialPageRoute(
                 builder: (context) => const WindowsMirrorPage());
+          case '/cart':
+            return MaterialPageRoute(builder: (context) => CartPage());
           case '/detailspage':
             // Extract arguments passed to the route
             final args = settings.arguments as Map<String, String>;

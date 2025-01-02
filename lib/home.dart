@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'cart.dart'; // Import the CartPage
 import 'whitemirror.dart';
-import 'wINDOWSmirror.dart';
+import 'windowsmirror.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -8,16 +9,21 @@ class HomePage extends StatelessWidget {
   void _onNavBarTap(BuildContext context, int index) {
     switch (index) {
       case 0:
-        Navigator.pushNamed(context, '/');
+        Navigator.pushNamed(context, '/'); // Navigate to Home
         break;
       case 1:
-        Navigator.pushNamed(context, '/categories');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CartPage(), // Navigate to CartPage
+          ),
+        );
         break;
       case 2:
-        Navigator.pushNamed(context, '/search');
+        Navigator.pushNamed(context, '/search'); // Navigate to Search
         break;
       case 3:
-        Navigator.pushNamed(context, '/profile');
+        Navigator.pushNamed(context, '/profile'); // Navigate to Profile
         break;
     }
   }
@@ -98,7 +104,7 @@ class HomePage extends StatelessWidget {
                 color: Colors.brown[400],
               ),
               accountName: const Text(
-                'Customer Naame',
+                'Customer Name',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               accountEmail: const Text('customer@example.com'),
@@ -204,7 +210,7 @@ class HomePage extends StatelessWidget {
                                 builder: (context) => const WindowsMirrorPage(),
                               ),
                             );
-                          } // Add action for "View" button
+                          } // Handle navigation based on category
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.brown[400],
@@ -223,7 +229,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 1, // Set active index to 1 for "Categories"
+        currentIndex: 1, // Set active index to 1
         onTap: (index) => _onNavBarTap(context, index),
         backgroundColor: Colors.brown[400],
         selectedItemColor: Colors.white,
@@ -235,8 +241,8 @@ class HomePage extends StatelessWidget {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            label: 'Categories',
+            icon: Icon(Icons.shopping_cart), // Changed icon to Cart
+            label: 'Cart',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),

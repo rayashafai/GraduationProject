@@ -25,8 +25,8 @@ class BottomNavBar extends StatelessWidget {
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.category),
-          label: 'Categories',
+          icon: Icon(Icons.shopping_cart), // Changed to shopping cart icon
+          label: 'Cart', // Correct label for cart
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.search),
@@ -34,7 +34,7 @@ class BottomNavBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.favorite),
-          label: 'Favorites',
+          label: 'Profile',
         ),
       ],
     );
