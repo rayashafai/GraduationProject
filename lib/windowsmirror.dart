@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'windowsdetails.dart'; // Import the whitemirrorPage
+import 'windowsdetails.dart'; // Import the WindowsDetailPage
 
 class WindowsMirrorPage extends StatelessWidget {
   const WindowsMirrorPage({Key? key}) : super(key: key);
@@ -44,7 +44,6 @@ class WindowsMirrorPage extends StatelessWidget {
         'image':
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIRMuNhUXTQzZw0u0eRmXFZRO15ZT-DNR_Vw&s', // Replace with actual image URL
       },
-      // Add more products as needed
     ];
 
     return Scaffold(
@@ -57,8 +56,7 @@ class WindowsMirrorPage extends StatelessWidget {
           image: DecorationImage(
             image: NetworkImage(
                 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgpG5mthX6nD0IedvjM69paFE3UtnGK9E74Q&s'),
-            fit: BoxFit
-                .cover, // This ensures the image covers the whole background
+            fit: BoxFit.cover,
           ),
         ),
         child: Padding(
@@ -86,7 +84,6 @@ class WindowsMirrorPage extends StatelessWidget {
                   ),
                   trailing: ElevatedButton(
                     onPressed: () {
-                      // Navigate to the product detail page and pass product data
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -114,17 +111,17 @@ class WindowsMirrorPage extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.brown[400], // Set background color
-        selectedItemColor: Colors.white, // Set selected item color
-        unselectedItemColor: const Color.fromARGB(255, 238, 205,
-            205), // Unselected items remain grey        currentIndex: 1, // Set to 1 as this is the View Products page
+        backgroundColor: Colors.brown[400],
+        selectedItemColor: Colors.white,
+        unselectedItemColor: const Color.fromARGB(255, 238, 205, 205),
+        currentIndex: 1, // Set to 1 as this page focuses on Products
         onTap: (index) {
           switch (index) {
             case 0:
               Navigator.pushNamed(context, '/home');
               break;
             case 1:
-              // Stay on the current page
+              Navigator.pushNamed(context, '/cart'); // Navigate to Cart page
               break;
             case 2:
               Navigator.pushNamed(context, '/search');
@@ -140,8 +137,8 @@ class WindowsMirrorPage extends StatelessWidget {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            label: 'Categories',
+            icon: Icon(Icons.shopping_cart), // Updated to shopping cart icon
+            label: 'Cart', // Updated label
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),

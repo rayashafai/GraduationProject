@@ -1,22 +1,43 @@
 import 'package:flutter/material.dart';
 
-class CartPage extends StatelessWidget {
-  final List<Map<String, dynamic>> cartItems = [
-    {
-      'name': 'Product 1',
-      'price': 25.99,
-      'quantity': 2,
-      'image':
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgpG5mthX6nD0IedvjM69paFE3UtnGK9E74Q&s',
-    },
-    {
-      'name': 'Product 2',
-      'price': 40.00,
-      'quantity': 1,
-      'image':
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgpG5mthX6nD0IedvjM69paFE3UtnGK9E74Q&s',
-    },
-  ];
+class CartPage extends StatefulWidget {
+  @override
+  _CartPageState createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  List<Map<String, dynamic>> cartItems = [];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Get the arguments passed from ProductDetailPage and cast it to Map<String, dynamic>
+    final newProduct =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+
+    if (newProduct != null) {
+      setState(() {
+        cartItems.add(newProduct);
+      });
+    }
+  }
+
+  // Method to handle item quantity update
+  void _updateQuantity(int index, int delta) {
+    setState(() {
+      cartItems[index]['quantity'] += delta;
+      if (cartItems[index]['quantity'] <= 0) {
+        cartItems.removeAt(index);
+      }
+    });
+  }
+
+  // Method to handle item removal
+  void _removeItem(int index) {
+    setState(() {
+      cartItems.removeAt(index);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +113,9 @@ class CartPage extends StatelessWidget {
                                   IconButton(
                                     icon: const Icon(Icons.remove),
                                     onPressed: () {
-                                      // Handle quantity decrement
+                                      if (item['quantity'] > 1) {
+                                        _updateQuantity(index, -1);
+                                      }
                                     },
                                   ),
                                   Text(
@@ -102,7 +125,7 @@ class CartPage extends StatelessWidget {
                                   IconButton(
                                     icon: const Icon(Icons.add),
                                     onPressed: () {
-                                      // Handle quantity increment
+                                      _updateQuantity(index, 1);
                                     },
                                   ),
                                 ],
@@ -114,7 +137,7 @@ class CartPage extends StatelessWidget {
                         IconButton(
                           icon: const Icon(Icons.delete, color: Colors.red),
                           onPressed: () {
-                            // Handle remove item logic
+                            _removeItem(index);
                           },
                         ),
                       ],
@@ -145,7 +168,7 @@ class CartPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Total:',
+                        'Total: ',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -166,7 +189,7 @@ class CartPage extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Navigate to checkout or implement checkout functionality
+                        // Implement checkout logic
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                               content: Text('Proceeding to Checkout')),

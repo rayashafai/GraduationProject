@@ -26,7 +26,7 @@ class ProfilePage extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
-                  color: Colors.brown.withOpacity(0.8), // Transparent overlay
+                  color: Colors.brown.withOpacity(0.8),
                   border: Border(
                     bottom: BorderSide(color: Colors.grey[300]!, width: 1),
                   ),
@@ -38,7 +38,7 @@ class ProfilePage extends StatelessWidget {
                         const CircleAvatar(
                           radius: 40,
                           backgroundImage: NetworkImage(
-                            'https://example.com/your-profile-image-url.jpg', // Replace with your image URL
+                            'https://example.com/your-profile-image-url.jpg',
                           ),
                         ),
                         const SizedBox(width: 16),
@@ -58,7 +58,7 @@ class ProfilePage extends StatelessWidget {
                               'SabrinaAry208@gmail.com',
                               style: TextStyle(
                                 fontSize: 14,
-                                fontWeight: FontWeight.bold, // Bold text
+                                fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
                             ),
@@ -83,7 +83,7 @@ class ProfilePage extends StatelessWidget {
                         'Edit Profile',
                         style: TextStyle(
                           color: Color.fromARGB(255, 90, 63, 53),
-                          fontWeight: FontWeight.bold, // Bold text
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -120,18 +120,17 @@ class ProfilePage extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.brown[400], // Set background color
-        selectedItemColor: Colors.white, // Set selected item color
-        unselectedItemColor: const Color.fromARGB(
-            255, 238, 205, 205), // Unselected items remain grey
-        currentIndex: 3, // Set to 3 as this corresponds to Profile
+        backgroundColor: Colors.brown[400],
+        selectedItemColor: Colors.white,
+        unselectedItemColor: const Color.fromARGB(255, 238, 205, 205),
+        currentIndex: 3,
         onTap: (index) {
           switch (index) {
             case 0:
               Navigator.pushNamed(context, '/home');
               break;
             case 1:
-              Navigator.pushNamed(context, '/viewproduct');
+              Navigator.pushNamed(context, '/cart'); // Navigate to cart
               break;
             case 2:
               Navigator.pushNamed(context, '/search');
@@ -147,8 +146,8 @@ class ProfilePage extends StatelessWidget {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            label: 'Categories',
+            icon: Icon(Icons.shopping_cart), // Changed to shopping cart
+            label: 'Cart',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
@@ -166,27 +165,23 @@ class ProfilePage extends StatelessWidget {
   Widget _buildListTile(IconData icon, String title, BuildContext context,
       {Color iconColor = const Color.fromARGB(255, 90, 63, 53)}) {
     return ListTile(
-      leading: Icon(icon, color: iconColor), // Set icon color
+      leading: Icon(icon, color: iconColor),
       title: Text(
         title,
         style: TextStyle(
-          color: const Color.fromARGB(
-              255, 145, 102, 87), // Set text color to brown
-          fontSize: 20, // Larger text size
-          fontWeight: FontWeight.bold, // Bold text
+          color: const Color.fromARGB(255, 145, 102, 87),
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
         ),
       ),
-      trailing:
-          const Icon(Icons.arrow_forward, color: Colors.brown), // Arrow icon
+      trailing: const Icon(Icons.arrow_forward, color: Colors.brown),
       onTap: () {
-        // Navigate to the corresponding page (you can modify this as per your page structure)
         _navigateToPage(context, title);
       },
     );
   }
 
   void _navigateToPage(BuildContext context, String title) {
-    // Example navigation logic
     switch (title) {
       case "Favourites":
         Navigator.pushNamed(context, '/favourites');

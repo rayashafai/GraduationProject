@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; // Import provider for cart management
+import 'cartmodel.dart'; // Import CartModel
 
 class ProductDetailPage extends StatelessWidget {
   final String name;
@@ -147,11 +149,25 @@ class ProductDetailPage extends StatelessWidget {
                       const SizedBox(width: 10),
                       ElevatedButton(
                         onPressed: () {
-                          // Implement Add to Cart functionality
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('Product added to cart')),
-                          );
+                          // Remove '$' and convert price to double
+                          final cleanPrice =
+                              double.parse(price.replaceAll('\$', ''));
+
+                          // Create product object
+                          final product = {
+                            'name': name,
+                            'price': cleanPrice,
+                            'quantity': 1,
+                            'image': image,
+                          };
+
+                          // Add product to the cart using CartModel
+                          final cartModel =
+                              Provider.of<CartModel>(context, listen: false);
+                          cartModel.addToCart(product);
+
+                          // Navigate to CartPage
+                          Navigator.pushNamed(context, '/cart');
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.brown[400],
@@ -183,7 +199,7 @@ class ProductDetailPage extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
-            label: 'Cart', // Changed to Cart
+            label: 'Cart',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),

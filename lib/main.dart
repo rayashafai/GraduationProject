@@ -1,21 +1,26 @@
-//import 'package:firstt/whitemirror.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; // Import provider
 import 'welcome.dart'; // Import WelcomePage
 import 'signin.dart'; // Import SignInPage
 import 'signup.dart'; // Import SignUpPage
 import 'home.dart'; // Import HomePage
 import 'whitemirror.dart'; // Import WhiteMirrorPage
-import 'windowsmirror.dart'; // Import WhiteMirrorPage
+import 'windowsmirror.dart'; // Import WindowsMirrorPage
 import 'detailspage.dart'; // Import ProductDetailPage
 import 'profile.dart'; // Import ProfilePage
 import 'editprofile.dart'; // Import EditProfilePage
 import 'adminlogin.dart'; // Import AdminLoginPage
 import 'admin.dart'; // Import AdminPage
-import 'cart.dart';
-//import 'managecontent.dart'; //Import ManageContentPage
+import 'cart.dart'; // Import CartPage
+import 'cartmodel.dart'; // Import CartModel
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => CartModel(), // Provide CartModel globally
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -69,9 +74,6 @@ class MyApp extends StatelessWidget {
                 builder: (context) => const AdminLoginPage());
           case '/admin':
             return MaterialPageRoute(builder: (context) => const AdminPage());
-          //  case '/managecontent':
-          // return MaterialPageRoute(
-          //   builder: (context) => const ManageContentPage());
           default:
             return MaterialPageRoute(builder: (context) => const WelcomePage());
         }

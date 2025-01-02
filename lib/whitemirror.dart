@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'detailspage.dart'; // Import the whitemirrorPage
+import 'detailspage.dart'; // Import the product detail page
 
 class WhiteMirrorPage extends StatelessWidget {
   const WhiteMirrorPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // List of sample products with names, prices, and images
     final List<Map<String, String>> products = [
       {
         'name': 'Ariana Mirrors',
@@ -44,8 +43,6 @@ class WhiteMirrorPage extends StatelessWidget {
         'image':
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ17A3Q7LE90umaUxrtJZEWnh8GT7kdj1hBXQ&s', // Replace with actual image URL
       },
-
-      // Add more products as needed
     ];
 
     return Scaffold(
@@ -57,9 +54,9 @@ class WhiteMirrorPage extends StatelessWidget {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgpG5mthX6nD0IedvjM69paFE3UtnGK9E74Q&s'),
-            fit: BoxFit
-                .cover, // This ensures the image covers the whole background
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgpG5mthX6nD0IedvjM69paFE3UtnGK9E74Q&s',
+            ),
+            fit: BoxFit.cover,
           ),
         ),
         child: Padding(
@@ -79,15 +76,20 @@ class WhiteMirrorPage extends StatelessWidget {
                   ),
                   title: Text(
                     products[index]['name']!,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
                   subtitle: Text(
                     products[index]['price']!,
-                    style: const TextStyle(fontSize: 16, color: Colors.green),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.green,
+                    ),
                   ),
                   trailing: ElevatedButton(
                     onPressed: () {
-                      // Navigate to the product detail page and pass product data
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -104,7 +106,7 @@ class WhiteMirrorPage extends StatelessWidget {
                     ),
                     child: const Text(
                       'More',
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                      style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                   ),
                 ),
@@ -115,17 +117,18 @@ class WhiteMirrorPage extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.brown[400], // Set background color
-        selectedItemColor: Colors.white, // Set selected item color
-        unselectedItemColor: const Color.fromARGB(255, 238, 205,
-            205), // Unselected items remain grey        currentIndex: 1, // Set to 1 as this is the View Products page
+        backgroundColor: Colors.brown[400],
+        selectedItemColor: Colors.white,
+        unselectedItemColor: const Color.fromARGB(255, 238, 205, 205),
+        currentIndex: 1, // Reflects the View Products page
         onTap: (index) {
           switch (index) {
             case 0:
               Navigator.pushNamed(context, '/home');
               break;
             case 1:
-              // Stay on the current page
+              Navigator.pushNamed(
+                  context, '/cart'); // Navigate to the cart page
               break;
             case 2:
               Navigator.pushNamed(context, '/search');
@@ -141,8 +144,8 @@ class WhiteMirrorPage extends StatelessWidget {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            label: 'Categories',
+            icon: Icon(Icons.shopping_cart), // Changed to shopping cart
+            label: 'Cart', // Updated label
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),

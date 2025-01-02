@@ -141,7 +141,7 @@ class EditProfilePage extends StatelessWidget {
               Navigator.pushNamed(context, '/home');
               break;
             case 1:
-              Navigator.pushNamed(context, '/categories');
+              Navigator.pushNamed(context, '/cart'); // Navigate to cart
               break;
             case 2:
               Navigator.pushNamed(context, '/search');
@@ -157,8 +157,8 @@ class EditProfilePage extends StatelessWidget {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            label: 'Categories',
+            icon: Icon(Icons.shopping_cart), // Changed to shopping cart icon
+            label: 'Cart',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),

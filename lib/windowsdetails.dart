@@ -18,7 +18,7 @@ class WindowsDetailPage extends StatelessWidget {
         Navigator.pushNamed(context, '/home'); // Navigate to Home
         break;
       case 1:
-        Navigator.pushNamed(context, '/viewproduct'); // Navigate to Products
+        Navigator.pushNamed(context, '/cart'); // Navigate to Cart
         break;
       case 2:
         Navigator.pushNamed(context, '/search'); // Navigate to Search
@@ -47,11 +47,11 @@ class WindowsDetailPage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            // Product Image Section with Reduced Width and Increased Height
+            // Product Image Section
             Container(
               margin: const EdgeInsets.all(16.0),
-              height: 300, // Increased height
-              width: 250, // Smaller width
+              height: 300,
+              width: 250,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
@@ -174,7 +174,7 @@ class WindowsDetailPage extends StatelessWidget {
         backgroundColor: Colors.brown[400],
         selectedItemColor: Colors.white,
         unselectedItemColor: const Color.fromARGB(255, 238, 205, 205),
-        currentIndex: 1, // Set to 1 as this corresponds to View Products
+        currentIndex: 1, // Set to 1 as this page is focused on Cart
         onTap: (index) => _onNavBarTap(context, index),
         items: const [
           BottomNavigationBarItem(
@@ -182,8 +182,8 @@ class WindowsDetailPage extends StatelessWidget {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            label: 'Categories',
+            icon: Icon(Icons.shopping_cart), // Updated icon to shopping cart
+            label: 'Cart', // Updated label
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
