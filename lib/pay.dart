@@ -27,16 +27,22 @@ class _PaymentPageState extends State<PaymentPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Payment'),
-        backgroundColor: Colors.deepPurpleAccent, // AppBar color
+        backgroundColor: Colors.brown[400], // AppBar color
         elevation: 0, // Remove shadow for a clean look
       ),
+      extendBodyBehindAppBar: true,
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.purple.shade800, Colors.blue.shade600],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            stops: [0.2, 0.8],
+          image: DecorationImage(
+            image: NetworkImage(
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgpG5mthX6nD0IedvjM69paFE3UtnGK9E74Q&s',
+            ),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+              const Color.fromARGB(255, 228, 222, 222)
+                  .withOpacity(0.6), // Dark overlay for readability
+              BlendMode.darken,
+            ),
           ),
         ),
         child: Padding(
@@ -54,7 +60,7 @@ class _PaymentPageState extends State<PaymentPage> {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                 ],
@@ -99,6 +105,48 @@ class _PaymentPageState extends State<PaymentPage> {
           ),
         ),
       ),
+      // Bottom Navigation Bar
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.brown[400],
+        selectedItemColor: Colors.white,
+        unselectedItemColor: const Color.fromARGB(255, 238, 205, 205),
+        currentIndex: 1, // Set to 1 as this page is focused on Payment
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Navigator.pushNamed(context, '/home'); // Navigate to Home
+              break;
+            case 1:
+              // Stay on PaymentPage
+              break;
+            case 2:
+              Navigator.pushNamed(context, '/search'); // Navigate to Search
+              break;
+            case 3:
+              Navigator.pushNamed(context, '/profile'); // Navigate to Profile
+              break;
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.payment),
+            label: 'Payment',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+      ),
     );
   }
 
@@ -106,17 +154,20 @@ class _PaymentPageState extends State<PaymentPage> {
   Widget _paymentMethodTile(
       BuildContext context, String title, IconData icon, String value) {
     return ListTile(
-      leading: Icon(icon, color: Colors.white, size: 30),
-      title: Text(title, style: TextStyle(color: Colors.white, fontSize: 18)),
+      leading: Icon(icon, color: Colors.brown, size: 30),
+      title: Text(title, style: TextStyle(color: Colors.brown, fontSize: 18)),
       trailing: Radio<String>(
         value: value,
         groupValue: _selectedPaymentMethod,
         onChanged: (newValue) {
-          setState(() {
-            _selectedPaymentMethod = newValue!;
-          });
+          if (newValue != null) {
+            // Null safety check
+            setState(() {
+              _selectedPaymentMethod = newValue;
+            });
+          }
         },
-        activeColor: Colors.white,
+        activeColor: Colors.brown,
       ),
     );
   }
@@ -128,7 +179,7 @@ class _PaymentPageState extends State<PaymentPage> {
       children: [
         _costRow('Subtotal', '\$59.87'),
         _costRow('Delivery', '\$12.43'),
-        Divider(color: Colors.white),
+        Divider(color: Colors.brown),
         _costRow('Total', '\$72.30', isBold: true),
       ],
     );
@@ -143,7 +194,7 @@ class _PaymentPageState extends State<PaymentPage> {
           label,
           style: TextStyle(
             fontSize: 16,
-            color: Colors.white,
+            color: Colors.brown,
             fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
           ),
         ),
@@ -151,7 +202,7 @@ class _PaymentPageState extends State<PaymentPage> {
           amount,
           style: TextStyle(
             fontSize: 16,
-            color: Colors.white,
+            color: Colors.brown,
             fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
           ),
         ),
@@ -164,10 +215,11 @@ class _PaymentPageState extends State<PaymentPage> {
     return Center(
       child: ElevatedButton(
         onPressed: () {
-          // Your payment logic goes here
+          Navigator.pushNamed(
+              context, '/bookingDate'); // Your payment logic goes here
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.deepPurpleAccent, // Background color
+          backgroundColor: Colors.brown[700], // Background color
           padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),

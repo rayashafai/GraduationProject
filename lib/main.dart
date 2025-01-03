@@ -14,6 +14,8 @@ import 'admin.dart'; // Import AdminPage
 import 'cart.dart'; // Import CartPage
 import 'cartmodel.dart'; // Import CartModel
 import 'pay.dart';
+import 'bookingDate.dart';
+import 'map.dart';
 
 void main() {
   runApp(
@@ -57,6 +59,10 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => PaymentPage());
           case '/cart':
             return MaterialPageRoute(builder: (context) => CartPage());
+          case '/bookingDate':
+            return MaterialPageRoute(builder: (context) => BookingPage());
+          case '/map':
+            return MaterialPageRoute(builder: (context) => MapPage());
           case '/detailspage':
             // Extract arguments passed to the route
             final args = settings.arguments as Map<String, String>;
