@@ -23,14 +23,8 @@ class _MapPageState extends State<MapPage> {
   void initState() {
     super.initState();
     _polylineCoordinates = [widget.startPoint, widget.endPoint];
-  }
+  } // This function ensures the map view adjusts to show both cities in the view
 
-  // This function moves the camera to a specific city
-  void moveCameraToCity(LatLng city) {
-    _mapController.animateCamera(CameraUpdate.newLatLng(city));
-  }
-
-  // This function ensures the map view adjusts to show both cities in the view
   void _fitBounds() async {
     LatLngBounds bounds = LatLngBounds(
       southwest: LatLng(
@@ -53,6 +47,7 @@ class _MapPageState extends State<MapPage> {
 
     // Adjust the camera to fit the bounds of both cities with some padding
     _mapController.animateCamera(CameraUpdate.newLatLngBounds(bounds, 100));
+    print("Camera updated to fit bounds");
   }
 
   @override
@@ -71,8 +66,11 @@ class _MapPageState extends State<MapPage> {
         polylines: _createPolyline(),
         onMapCreated: (controller) {
           _mapController = controller;
-          // Ensure the camera fits both points as soon as the map is created
-          _fitBounds();
+          // Ensure the camera fits both points after the map is created
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _fitBounds();
+          });
+          print("Google Map created");
         },
       ),
       floatingActionButton: FloatingActionButton(

@@ -1,5 +1,8 @@
-package com.example.ios
+import io.flutter.plugins.googlemaps.GoogleMapsPlugin
 
-import io.flutter.embedding.android.FlutterActivity
-
-class MainActivity: FlutterActivity()
+class MainActivity: FlutterActivity() {
+    override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
+        super.configureFlutterEngine(flutterEngine)
+        GoogleMapsPlugin.registerWith(flutterEngine)
+    }
+}

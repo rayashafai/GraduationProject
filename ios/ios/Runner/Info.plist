@@ -45,5 +45,15 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<!-- Google Maps API Key -->
+	<key>GMSApiKey</key>
+	<string>AIzaSyCvnv7JtzDlYyFa_rRCWzxRQkD5T_64MSA</string>
+
+	<!-- Location permissions -->
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location for maps</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location for maps</string>
 </dict>
 </plist>
