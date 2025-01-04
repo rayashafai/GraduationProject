@@ -1,0 +1,19 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '10.0'
+
+# CocoaPods analytics sends network stats asynchronously
+# to https://analytics.cocoapods.org/ so we can improve the CocoaPods experience.
+# If you don't want to send statistics, add the following line to your Podfile:
+#   analytics_disabled = true
+
+# Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+# use_frameworks!
+
+target 'Runner' do
+  # Pods for Runner
+  pod 'GoogleMaps', '~> 3.10.0' # You can use the latest Google Maps version
+
+  # Flutter specific plugin dependencies
+  flutter_install_all_plugins
+
+end

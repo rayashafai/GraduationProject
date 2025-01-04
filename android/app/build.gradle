@@ -39,6 +39,9 @@ android {
     }
 }
 
+// Apply the Google services plugin
+apply plugin: 'com.google.gms.google-services'  // Add this line at the bottom of the file
+
 flutter {
     source = "../.."
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // Import provider
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'welcome.dart'; // Import WelcomePage
 import 'signin.dart'; // Import SignInPage
 import 'signup.dart'; // Import SignUpPage
@@ -62,7 +63,14 @@ class MyApp extends StatelessWidget {
           case '/bookingDate':
             return MaterialPageRoute(builder: (context) => BookingPage());
           case '/map':
-            return MaterialPageRoute(builder: (context) => MapPage());
+            final args = settings.arguments
+                as Map<String, LatLng>; // Expect a map with coordinates
+            return MaterialPageRoute(
+              builder: (context) => MapPage(
+                startPoint: args['startPoint']!,
+                endPoint: args['endPoint']!,
+              ),
+            );
           case '/detailspage':
             // Extract arguments passed to the route
             final args = settings.arguments as Map<String, String>;

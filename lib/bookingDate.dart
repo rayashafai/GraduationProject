@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'map.dart';
 
 class BookingPage extends StatefulWidget {
@@ -9,6 +10,25 @@ class BookingPage extends StatefulWidget {
 class _BookingPageState extends State<BookingPage> {
   DateTime? selectedStartDate;
   DateTime? selectedEndDate;
+  String selectedCity = "Ramallah";
+
+  // Coordinates for Palestinian cities
+  final Map<String, LatLng> cityCoordinates = {
+    "Nablus": LatLng(32.2211, 35.2544),
+    "Ramallah": LatLng(31.8996, 35.2042),
+    "Hebron": LatLng(31.5326, 35.0998),
+    "Jerusalem": LatLng(31.7683, 35.2137),
+    "Bethlehem": LatLng(31.7054, 35.2024),
+    "Gaza": LatLng(31.3547, 34.3088),
+  };
+
+  final List<String> cities = [
+    "Ramallah",
+    "Hebron",
+    "Jerusalem",
+    "Bethlehem",
+    "Gaza"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +50,7 @@ class _BookingPageState extends State<BookingPage> {
           ),
         ],
       ),
-      extendBodyBehindAppBar: true, // Extend the body behind the AppBar
+      extendBodyBehindAppBar: true,
       body: Stack(
         children: [
           // Background Image
@@ -44,7 +64,6 @@ class _BookingPageState extends State<BookingPage> {
               ),
             ),
           ),
-
           // Foreground content
           SingleChildScrollView(
             child: Padding(
@@ -52,56 +71,16 @@ class _BookingPageState extends State<BookingPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 100), // Space below the AppBar
-                  // Destination card
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: ListTile(
-                      leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          'https://via.placeholder.com/80', // Replace with your image URL
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      title: Text("Cox's Bazar"),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Bangladesh"),
-                          Row(
-                            children: [
-                              Text("\$450 "),
-                              Text("3 Days",
-                                  style: TextStyle(color: Colors.grey)),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(Icons.star, color: Colors.orange, size: 16),
-                              Text("4.9 (2k Reviews)"),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(height: 20),
-
+                  SizedBox(height: 100),
                   // From and To section
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _locationInfo("From", "New York"),
-                      _locationInfo("To", "Cox's Bazar"),
+                      _locationInfo("From", "Nablus"),
+                      _destinationDropdown(),
                     ],
                   ),
-
                   SizedBox(height: 20),
-
                   // Booking dates
                   Text(
                     "Booking Your Date",
@@ -113,9 +92,7 @@ class _BookingPageState extends State<BookingPage> {
                   ),
                   SizedBox(height: 10),
                   _buildDatePicker(),
-
                   SizedBox(height: 20),
-
                   // Continue button
                   Center(
                     child: ElevatedButton(
@@ -126,13 +103,14 @@ class _BookingPageState extends State<BookingPage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => MapPage(
-                                  // startDate: selectedStartDate,
-                                  // endDate: selectedEndDate,
-                                  ),
+                                startPoint: cityCoordinates[
+                                    "Nablus"]!, // Nablus coordinates
+                                endPoint: cityCoordinates[
+                                    selectedCity]!, // Selected city's coordinates
+                              ),
                             ),
                           );
                         } else {
-                          // Show a message if dates are not selected
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
@@ -161,48 +139,6 @@ class _BookingPageState extends State<BookingPage> {
           ),
         ],
       ),
-      // Bottom Navigation Bar
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.brown[400],
-        selectedItemColor: Colors.white,
-        unselectedItemColor: const Color.fromARGB(255, 238, 205, 205),
-        currentIndex: 1, // Set to 1 as this page is focused on Booking
-        onTap: (index) {
-          switch (index) {
-            case 0:
-              Navigator.pushNamed(context, '/home'); // Navigate to Home
-              break;
-            case 1:
-              // Stay on BookingPage
-              break;
-            case 2:
-              Navigator.pushNamed(context, '/search'); // Navigate to Search
-              break;
-            case 3:
-              Navigator.pushNamed(context, '/profile'); // Navigate to Profile
-              break;
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'Booking',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
-      ),
     );
   }
 
@@ -226,10 +162,36 @@ class _BookingPageState extends State<BookingPage> {
     );
   }
 
+  Widget _destinationDropdown() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "To",
+          style: TextStyle(fontSize: 14, color: Colors.brown[400]),
+        ),
+        SizedBox(height: 5),
+        DropdownButton<String>(
+          value: selectedCity,
+          onChanged: (String? newValue) {
+            setState(() {
+              selectedCity = newValue!;
+            });
+          },
+          items: cities.map<DropdownMenuItem<String>>((String city) {
+            return DropdownMenuItem<String>(
+              value: city,
+              child: Text(city),
+            );
+          }).toList(),
+        ),
+      ],
+    );
+  }
+
   Widget _buildDatePicker() {
     return Column(
       children: [
-        // Calendar widget for selecting dates
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
